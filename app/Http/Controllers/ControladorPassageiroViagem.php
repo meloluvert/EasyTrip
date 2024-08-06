@@ -37,16 +37,16 @@ class ControladorPassageiroViagem extends Controller
         $dados->passageiro_id = $request->input('passageiro');
         $dados->viagem_id = $request->input('viagem_id');
         if($dados->save())
-            return redirect('/viagems')->with('success', 'Autor do livro cadastrado com sucesso!!');
-        return redirect('/viagems')->with('danger', 'Erro ao cadastrar autor do livro!');
+            return redirect('/viagems')->with('success', 'Passageiro do viagem cadastrado com sucesso!!');
+        return redirect('/viagems')->with('danger', 'Erro ao cadastrar passageiro do viagem!');
     }
     public function destroy(string $viagem_id, string $passageiro_id)
     {
         $dados = ViagemPassageiro::where('viagem_id', $viagem_id)->where('passageiro_id', $passageiro_id)->get();
         if(isset($dados)){
             ViagemPassageiro::where('viagem_id', $viagem_id)->where('passageiro_id', $passageiro_id)->delete();
-            return redirect('/viagems')->with('success', 'Autor do livro deletado com sucesso!!');
+            return redirect('/viagems')->with('success', 'Passageiro do viagem deletado com sucesso!!');
         }
-        return redirect('/viagems')->with('danger', 'Erro ao deletar autor do livro!');
+        return redirect('/viagems')->with('danger', 'Erro ao deletar passageiro do viagem!');
     }
 }

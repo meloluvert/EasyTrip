@@ -57,8 +57,8 @@ Route::post('/viagem', [App\Http\Controllers\ControladorViagem::class, 'store'])
 Route::get('/viagem/editar/{id}', [App\Http\Controllers\ControladorViagem::class, 'edit'])->name('editarViagem');
 Route::post('/viagem/{id}', [App\Http\Controllers\ControladorViagem::class, 'update'])->name('atualizaViagem');
 Route::get('/viagem/apagar/{id}', [App\Http\Controllers\ControladorViagem::class, 'destroy'])->name('deletaViagem');
-Route::get('/pesquisaViagem', [App\Http\Controllers\ControladorAutores::class, 'pesquisaAutor'])->name('pesquisaViagem');
-Route::get('/procuraViagem', [App\Http\Controllers\ControladorAutores::class, 'procuraAutor'])->name('procuraViagem');
+Route::get('/pesquisaViagem', [App\Http\Controllers\ControladorViagem::class, 'pesquisaViagem'])->name('pesquisaViagem');
+Route::get('/procuraViagem', [App\Http\Controllers\ControladorViagem::class, 'procuraViagem'])->name('procuraViagem');
 
 
 // Rotas para o ControladorPassageiroViagem

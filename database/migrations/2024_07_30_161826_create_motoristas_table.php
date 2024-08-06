@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome')->nullable(false);;
             $table->bigInteger('telefone')->nullable(false);;
             $table->date('data_carteira');
-            // $table->string('link_foto');
+            $table->string('link_foto')->nullable(true)->default(NULL);
             $table->timestamps();
         });
     }

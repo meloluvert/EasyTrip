@@ -13,6 +13,10 @@ class ControladorLocal extends Controller
     public function index()
     {
         $dados = Local::all();
+        foreach($dados as $item){
+            if (empty($item->link_foto)) {
+                $item->link_foto = "https://ltfstyleguide.azurewebsites.net/images/placeholder/card-img-cap.png";
+            }}
         return view('Local/exibe', compact('dados'));
     }
 
@@ -32,9 +36,10 @@ class ControladorLocal extends Controller
         $dados = new Local();
         $dados->nome = $request->input('nome');
         $dados->endereco = $request->input('endereco');
+        $dados->link_foto = $request->input('link_foto');
         if ($dados->save())
-            return redirect('/locais')->with('success', 'Autor cadastrado com sucesso!!');
-        return redirect('/locais')->with('danger', 'Erro ao cadastrar autor!');
+            return redirect('/locais')->with('success', 'local cadastrado com sucesso!!');
+        return redirect('/locais')->with('danger', 'Erro ao cadastrar motorista!');
     }
 
     /**
@@ -53,7 +58,7 @@ class ControladorLocal extends Controller
         $dados = Local::find($id);
         if (isset($dados))
             return view('Local/edita', compact('dados'));
-        return redirect('/locais')->with('danger', 'Cadastro do autor não localizado!');
+        return redirect('/locais')->with('danger', 'Cadastro do local não localizado!');
     }
 
     /**
@@ -65,10 +70,11 @@ class ControladorLocal extends Controller
         if (isset($dados)) {
             $dados->nome = $request->input('nome');
             $dados->endereco = $request->input('endereco');
+            $dados->link_foto = $request->input('link_foto');
             $dados->save();
-            return redirect('/locais')->with('success', 'Cadastro do Autor atualizado com sucesso!!');
+            return redirect('/locais')->with('success', 'Cadastro do local atualizado com sucesso!!');
         }
-        return redirect('/locais')->with('danger', 'Cadastro de autor não localizado!');
+        return redirect('/locais')->with('danger', 'Cadastro de local não localizado!');
     }
 
 
@@ -83,7 +89,7 @@ class ControladorLocal extends Controller
             $viagem_saida = Viagem::where('endereco_saida', '=', $id)->first();
             if (!isset($viagem_chegada) || !isset($viagem_saida)) {
                 $dados->delete();
-                return redirect('/locais')->with('success', 'Cadastro do Autor deletado com sucesso!!');
+                return redirect('/locais')->with('success', 'Cadastro do local deletado com sucesso!!');
             } else {
                 return redirect('/locais')->with('danger', 'Cadastro não pode ser excluído!!');
             }

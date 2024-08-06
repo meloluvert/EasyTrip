@@ -21,9 +21,9 @@
                 </select>
              </div>
             <hr>
-            <button type="submit" class="btn btn-outline-primary btn-sm">Salvar</button>
+            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
             <button onclick="window.location.href='{{route('inicio')}}';" type="button" 
-                    class="btn btn-outline-danger btn-sm">Cancelar</button>
+                    class="btn btn-danger btn-sm">Cancelar</button>
         </form>
     </div> 
 </div> 

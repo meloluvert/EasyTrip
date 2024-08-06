@@ -14,6 +14,10 @@ class ControladorMotorista extends Controller
     public function index()
     {
         $dados = Motorista::all();
+        foreach($dados as $item){
+            if (empty($item->link_foto)) {
+                $item->link_foto = "https://ltfstyleguide.azurewebsites.net/images/placeholder/card-img-cap.png";
+            }}
         return view('Motorista/exibe', compact('dados'));
     }
 
@@ -34,9 +38,10 @@ class ControladorMotorista extends Controller
         $dados->nome = $request->input('nome');
         $dados->telefone = $request->input('telefone');
         $dados->data_carteira = $request->input('data');
+        $dados->link_foto = $request->input('link_foto');
         if ($dados->save())
-            return redirect('/motoristas')->with('success', 'Motorista   cadastrado com sucesso!!');
-        return redirect('/motoristas')->with('danger', 'Erro ao cadastrar autor!');
+            return redirect('/motoristas')->with('success', 'Motorista cadastrado com sucesso!!');
+        return redirect('/motoristas')->with('danger', 'Erro ao cadastrar motorista!');
     }
 
     /**
@@ -55,7 +60,7 @@ class ControladorMotorista extends Controller
         $dados = Motorista::find($id);
         if (isset($dados))
             return view('Motorista/edita', compact('dados'));
-        return redirect('/motoristas')->with('danger', 'Cadastro do autor não localizado!');
+        return redirect('/motoristas')->with('danger', 'Cadastro do motorista não localizado!');
     }
 
     /**
@@ -68,10 +73,11 @@ class ControladorMotorista extends Controller
             $dados->nome = $request->input('nome');
             $dados->telefone = $request->input('telefone');
             $dados->data_carteira = $request->input('data');
+            $dados->link_foto = $request->input('link_foto');
             $dados->save();
-            return redirect('/motoristas')->with('success', 'Cadastro do Autor atualizado com sucesso!!');
+            return redirect('/motoristas')->with('success', 'Cadastro do motorista atualizado com sucesso!!');
         }
-        return redirect('/motoristas')->with('danger', 'Cadastro de autor não localizado!');
+        return redirect('/motoristas')->with('danger', 'Cadastro de motorista não localizado!');
     }
 
 
@@ -85,7 +91,7 @@ class ControladorMotorista extends Controller
             $viagem = Viagem::where('motorista', '=', $id)->first();
             if (!isset($viagem)) {
                 $dados->delete();
-                return redirect('/motoristas')->with('success', 'Cadastro do Autor deletado com sucesso!!');
+                return redirect('/motoristas')->with('success', 'Cadastro do motorista deletado com sucesso!!');
             } else {
                 return redirect('/motoristas')->with('danger', 'Cadastro não pode ser excluído!!');
             }

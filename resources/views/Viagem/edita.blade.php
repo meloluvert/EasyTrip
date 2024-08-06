@@ -21,29 +21,38 @@
                         <div class="form-group">
 
                         </div>
-                        <select name="carro">
+                        <label for="carro">carro:</label>
+                        <select name="carro" id="carro">
                             @foreach ($carros as $item)
                                 <option value="{{ $item->id }}">{{ $item->nome }}</option>
                             @endforeach
                         </select>
-                        <select name="local_chegada">
+                        <label for="local_chegada">Local da chegada:</label>
+                        <select name="local_chegada" id="local_chegada">
                             @foreach ($locais as $item)
                                 <option value="{{ $item->id }}">{{ $item->nome }}</option>
                             @endforeach
                         </select>
-                        <select name="local_saida">
+                        <label for="local_saida">Local da saída:</label>
+                        <select name="local_saida" id="local_saida">
                             @foreach ($locais as $item)
                                 <option value="{{ $item->id }}">{{ $item->nome }}</option>
                             @endforeach
                         </select>
-                        <select name="motorista">
+                        <label for="motorista">Motorista:</label>
+                        <select name="motorista" id="motorista">
                             @foreach ($motoristas as $item)
                                 <option value="{{ $item->id }}">{{ $item->nome }}</option>
                             @endforeach
                         </select>
-                        <button type="submit" class="btn btn-outline-primary btn-sm">Salvar</button>
+                        <div class="form-group">
+                            <label for="link_foto">link foto:</label>
+                            <input type="text" class="form-control" name="link_foto" 
+                                   " id="link_foto" value="{{$dados->link_foto}}">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
                         <button onclick="window.location.href='{{ route('inicio') }}';" type="button"
-                            class="btn btn-outline-danger btn-sm">Cancelar</button>
+                            class="btn btn-danger btn-sm">Cancelar</button>
                 </form>
             </div>
         </div>

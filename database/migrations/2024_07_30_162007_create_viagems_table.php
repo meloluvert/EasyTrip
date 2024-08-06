@@ -23,7 +23,8 @@ return new class extends Migration
             $table->foreign('endereco_chegada')->references('id')->on('locals');
             $table->foreign('endereco_saida')->references('id')->on('locals');
             $table->foreign('motorista')->references('id')->on('motoristas');
-            //$table->string('link_foto');
+            
+            $table->string('link_foto')->nullable(true)->default(NULL);
             $table->timestamps();
         });
     }

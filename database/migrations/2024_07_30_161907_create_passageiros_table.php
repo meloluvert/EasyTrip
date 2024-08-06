@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->bigInteger('telefone');
             $table->timestamps();
-            // $table->string('link_foto');
+            $table->string('link_foto')->nullable(true)->default(NULL);
         });
     }
 

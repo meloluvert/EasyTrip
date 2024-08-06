@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nome');
             $table->string('endereco')->nullable(false);;
             $table->timestamps();
+           
+            $table->string('link_foto')->nullable(true)->default(NULL);
         });
     }
 

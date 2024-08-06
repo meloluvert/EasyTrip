@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('placa_veiculo')->nullable(false);
             $table->integer('ano_carro')->nullable(false);
             $table->timestamps();
+
+            $table->string('link_foto')->nullable(true)->default(NULL);
         });
     }
 

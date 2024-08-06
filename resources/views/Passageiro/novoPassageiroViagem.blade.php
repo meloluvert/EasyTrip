@@ -14,16 +14,16 @@
             <input type="hidden" id="passageiro_id" name="passageiro_id" value={{$dados->passageiro_id}}>
             <div class="form-group">
                 <label for="autor">Passageiros</label><br />
-                <select name="autor">
+                <select name="autor" id="autor">
                         @foreach ($dados as $item)
                             <option value="{{$item->id}}">{{$item->Nome}}</option>
                         @endforeach
                 </select>
              </div>
             <hr>
-            <button type="submit" class="btn btn-outline-primary btn-sm">Salvar</button>
+            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
             <button onclick="window.location.href='{{route('inicio')}}';" type="button" 
-                    class="btn btn-outline-danger btn-sm">Cancelar</button>
+                    class="btn btn-danger btn-sm">Cancelar</button>
         </form>
     </div> 
 </div> 

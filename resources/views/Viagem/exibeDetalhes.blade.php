@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{ $item->nome }}</td>
                         <td style="text-align:center">
-                            <a href="/viagemPassageiros/apagar/{{$dados->viagem_id}}/{{$item->id}}" class="btn btn-outline-danger" 
+                            <a href="/viagemPassageiros/apagar/{{$dados->viagem_id}}/{{$item->id}}" class="btn btn-danger" 
                                onclick="return confirm('Tem certeza de que deseja remover?');">Deletar</a>
                         </td>
                     </tr>  

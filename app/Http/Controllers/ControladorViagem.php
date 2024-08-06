@@ -19,26 +19,31 @@ class ControladorViagem extends Controller
     {
         $dados = Viagem::all();
         foreach($dados as $item){
+            
             $id = $item->endereco_chegada;
             $local = Local::find($id);
-            $item->endereco_chegada = $local->nome;
+            $item->endereco_chegada = (empty($local->nome)) ?  'não há':$local->nome;
 
             $id = $item->endereco_saida;
             $local = Local::find($id);
-            $item->endereco_saida = $local->nome;
+            $item->endereco_saida = (empty($local->nome)) ?  'não há':$local->nome;
+
+            if (empty($item->link_foto)) {
+                $item->link_foto = "https://ltfstyleguide.azurewebsites.net/images/placeholder/card-img-cap.png";
+            }
 
             $id = $item->motorista;
             $motorista = Motorista::find($id);
-            $item->motorista = $motorista->nome;
+            $item->motorista = (empty($motorista->nome)) ?  'não há':$motorista->nome;
 
             $id = $item->carro;
             $carro = Carro::find($id);
-            $item->carro = $carro->nome;
+            $item->carro = (empty($carro->nome)) ?  'não há':$carro->nome;
             
 
         }
+
         
-        $dados->endereco_chegada = $local->nome;
         return view('Viagem/exibe', compact('dados'));
     }
 
@@ -62,9 +67,10 @@ class ControladorViagem extends Controller
         $dados->motorista = null;
         $dados->endereco_chegada = null;
         $dados->endereco_saida = null;
+        $dados->link_foto = $request->input('link_foto');
         if ($dados->save())
-            return redirect('/viagems')->with('success', 'Autor cadastrado com sucesso!!');
-        return redirect('/viagems')->with('danger', 'Erro ao cadastrar autor!');
+            return redirect('/viagems')->with('success', 'viagem cadastrada com sucesso!!');
+        return redirect('/viagems')->with('danger', 'Erro ao cadastrar viagem!');
     }
 
     /**
@@ -87,7 +93,7 @@ class ControladorViagem extends Controller
        
         if (isset($dados))
             return view('Viagem/edita', compact('dados','carros','locais','motoristas'));
-        return redirect('/viagems')->with('danger', 'Cadastro do autor não localizado!');
+        return redirect('/viagems')->with('danger', 'Cadastro da viagem não localizado!');
     }
 
     /**
@@ -103,11 +109,11 @@ class ControladorViagem extends Controller
             $dados->motorista = $request->input('motorista');
             $dados->endereco_chegada = $request->input('local_chegada');
             $dados->endereco_saida = $request->input('local_saida');
-           
+            $dados->link_foto = $request->input('link_foto');
             $dados->save();
-            return redirect('/viagems')->with('success', 'Cadastro do Autor atualizado com sucesso!!');
+            return redirect('/viagems')->with('success', 'Cadastro da viagem atualizado com sucesso!!');
         }
-        return redirect('/viagems')->with('danger', 'Cadastro de autor não localizado!');
+        return redirect('/viagems')->with('danger', 'Cadastro da viagem não localizado!');
     }
 
 
@@ -121,7 +127,7 @@ class ControladorViagem extends Controller
             
             if (!isset($viagem)) {
                 $dados->delete();
-                return redirect('/viagems')->with('success', 'Cadastro do Autor deletado com sucesso!!');
+                return redirect('/viagems')->with('success', 'Cadastro da viagem deletado com sucesso!!');
             } else {
                 return redirect('/viagems')->with('danger', 'Cadastro não pode ser excluído!!');
             }
@@ -141,5 +147,14 @@ class ControladorViagem extends Controller
             return view('Viagem/novoPassageiroViagem', compact('dados'));
         }
         return redirect('/viagem')->with('danger', 'Não há passageiros cadastrados!!');
+    }
+    public function pesquisaViagem(){
+        $dados = array("tabela" => "viagems");
+        return view('Viagem/pesquisa', compact('dados'));
+    }
+    public function procuraViagem(Request $request){
+        $nome = $request->input('texto');
+        $dados = DB::table('viagems')->select()->where(DB::raw('lower(nome)'), 'like', '%' . strtolower($nome) . '%')->get();
+        return view('Viagem/exibe', compact('dados'));
     }
 }

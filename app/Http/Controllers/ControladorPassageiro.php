@@ -15,6 +15,11 @@ class ControladorPassageiro extends Controller
     public function index()
     {
         $dados = Passageiro::all();
+        foreach($dados as $item){
+        if (empty($item->link_foto)) {
+            $item->link_foto = "https://ltfstyleguide.azurewebsites.net/images/placeholder/card-img-cap.png";
+        }}
+        
         return view('Passageiro/exibe', compact('dados'));
     }
 
@@ -34,9 +39,10 @@ class ControladorPassageiro extends Controller
         $dados = new Passageiro();
         $dados->nome = $request->input('nome');
         $dados->telefone = $request->input('telefone');
+        $dados->link_foto = $request->input('link_foto');
         if ($dados->save())
-            return redirect('/passageiros')->with('success', 'Autor cadastrado com sucesso!!');
-        return redirect('/passageiros')->with('danger', 'Erro ao cadastrar autor!');
+            return redirect('/passageiros')->with('success', 'passageiro cadastrado com sucesso!!');
+        return redirect('/passageiros')->with('danger', 'Erro ao cadastrar passageiro!');
     }
 
     /**
@@ -55,7 +61,7 @@ class ControladorPassageiro extends Controller
         $dados = Passageiro::find($id);
         if (isset($dados))
             return view('Passageiro/edita', compact('dados'));
-        return redirect('/passageiros')->with('danger', 'Cadastro do autor não localizado!');
+        return redirect('/passageiros')->with('danger', 'Cadastro do passageiro não localizado!');
     }
 
     /**
@@ -67,10 +73,11 @@ class ControladorPassageiro extends Controller
         if (isset($dados)) {
             $dados->nome = $request->input('nome');
             $dados->telefone = $request->input('telefone');
+            $dados->link_foto = $request->input('link_foto');
             $dados->save();
-            return redirect('/passageiros')->with('success', 'Cadastro do Autor atualizado com sucesso!!');
+            return redirect('/passageiros')->with('success', 'Cadastro do passageiro atualizado com sucesso!!');
         }
-        return redirect('/passageiros')->with('danger', 'Cadastro de autor não localizado!');
+        return redirect('/passageiros')->with('danger', 'Cadastro de passageiro não localizado!');
     }
 
 
@@ -84,7 +91,7 @@ class ControladorPassageiro extends Controller
             $viagem = ViagemPassageiro::where('passageiro_id', '=', $id)->first();
             if (!isset($viagem)) {
                 $dados->delete();
-                return redirect('/passageiros')->with('success', 'Cadastro do Autor deletado com sucesso!!');
+                return redirect('/passageiros')->with('success', 'Cadastro do passageiro deletado com sucesso!!');
             } else {
                 return redirect('/passageiros')->with('danger', 'Cadastro não pode ser excluído!!');
             }

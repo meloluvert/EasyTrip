@@ -4,7 +4,7 @@
 <div class="card border">
         <div class="jumbotron jumbotron-fluid">
             <div class="container-fluid">
-                <h1 class="mt-5 text-center">CADASTRE UM NOVO PASSAGEIRO</h1>
+                <h1 class="mt-5 text-center">CADASTRE UMA NOVA VIAGEM</h1>
             </div>
         </div>
         <div class="card-body d-flex justify-content-start">
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="link_foto">Link da foto:</label>
                 <input type="text" class="form-control" name="link_foto" 
-                       placeholder="Iforme o link da foto" id="link_foto">
+                       placeholder="Informe o link da foto" id="link_foto">
             </div>
 
         

@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class="jumbotron jumbotron-fluid">
             <div class="container-fluid">
-                <h1 class="mt-5 text-center">CADASTRE UM NOVO AUTOR PARA ESTE LIVRO</h1>
+                <h1 class="mt-5 text-center">CADASTRE UM PASSAGEIO NESTA VIAGEM</h1>
                 <h6 class="text-center">{{$dados->nome}}</h6>
             </div>
         </div>

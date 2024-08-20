@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label for="link_foto">Link da foto:</label>
                 <input type="text" class="form-control" name="link_foto" 
-                       placeholder="Iforme o link da foto" id="link_foto">
+                       placeholder="Informe o link da foto" id="link_foto">
             </div>
             <hr>
             <button type="submit" class="btn btn-primary btn-sm">Salvar</button>

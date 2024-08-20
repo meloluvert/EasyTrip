@@ -155,6 +155,32 @@ class ControladorViagem extends Controller
     public function procuraViagem(Request $request){
         $nome = $request->input('texto');
         $dados = DB::table('viagems')->select()->where(DB::raw('lower(nome)'), 'like', '%' . strtolower($nome) . '%')->get();
+        foreach($dados as $item){
+            
+            $id = $item->endereco_chegada;
+            $local = Local::find($id);
+            $item->endereco_chegada = (empty($local->nome)) ?  'não há':$local->nome;
+
+            $id = $item->endereco_saida;
+            $local = Local::find($id);
+            $item->endereco_saida = (empty($local->nome)) ?  'não há':$local->nome;
+
+            if (empty($item->link_foto)) {
+                $item->link_foto = "https://ltfstyleguide.azurewebsites.net/images/placeholder/card-img-cap.png";
+            }
+
+            $id = $item->motorista;
+            $motorista = Motorista::find($id);
+            $item->motorista = (empty($motorista->nome)) ?  'não há':$motorista->nome;
+
+            $id = $item->carro;
+            $carro = Carro::find($id);
+            $item->carro = (empty($carro->nome)) ?  'não há':$carro->nome;
+            
+
+        }
+
+        
         return view('Viagem/exibe', compact('dados'));
     }
 }

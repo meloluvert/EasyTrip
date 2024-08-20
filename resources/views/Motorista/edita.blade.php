@@ -27,7 +27,7 @@
                 <input type="date" class="form-control" name="data" 
                        value="{{$dados->data_carteira}}"id="data">
             </div>
-            <div class="form-group">
+            <div class="form-group">ngra, a banda
                 <label for="link_foto">link foto:</label>
                 <input type="text" class="form-control" name="link_foto" 
                        " id="link_foto" value="{{$dados->link_foto}}">
